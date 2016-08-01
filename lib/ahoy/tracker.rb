@@ -127,6 +127,7 @@ module Ahoy
       cookie[:expires] = duration.from_now if duration
       domain = Ahoy.cookie_domain || Ahoy.domain
       cookie[:domain] = domain if domain && use_domain
+      cookie[:path] = controller.ahoy_cookie_path if controller.respond_to?(:ahoy_cookie_path)
       request.cookie_jar[name] = cookie
     end
 

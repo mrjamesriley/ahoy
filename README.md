@@ -1,3 +1,30 @@
+# Updates to Ahoy in this fork (mrjamesriley)
+
+We needed to be able to achieve the following using Ahoy:
+
+* Have visits to our users paths recorded as indepdent visits
+(our users paths were each directly under the domain, e.g `/alice` and `/bob`)
+
+Usage: have the visited controller of your app define a `ahoy_cookie_path` method, e.g:
+
+```
+  def ahoy_cookie_path
+    return nil unless @user.present?
+    "/#{@user.username}"
+  end
+```
+
+* Be able to add custom data to a recorded Ahoy visit, passed in via the visited page
+(in our case, the desire to record which users account the visitor has landed on)
+
+Usage: define a global `ahoyCustomData` variable to be merged in with the `/ahoy/visit` POST data:
+
+```
+  window.ahoyCustomData = {
+    profile_id: '#{@profile.id.to_s}'
+  }
+```
+
 # Ahoy
 
 Ahoy provides a solid foundation to track visits and events in Ruby, JavaScript, and native apps. Works with any data store so you can easily scale.

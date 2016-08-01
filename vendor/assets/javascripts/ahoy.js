@@ -251,10 +251,14 @@
           screen_height: window.screen.height
         };
 
-        // referrer
-        if (document.referrer.length > 0) {
-          data.referrer = document.referrer;
-        }
+      if(window.ahoyCustomData) {
+        $.extend(data, ahoyCustomData)
+      }
+
+      // referrer
+      if (document.referrer.length > 0) {
+        data.referrer = document.referrer;
+      }
 
         log(data);
 
